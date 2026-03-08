@@ -198,11 +198,11 @@
             minDate.setDate(now.getDate() + minDays);
             maxDate.setDate(now.getDate() + maxDays);
             const options = { day: 'numeric', month: 'short' };
-            return "Consegna: " + minDate.toLocaleDateString('it-IT', options) + " - " + maxDate.toLocaleDateString('it-IT', options);
+            return "Evasione " + minDate.toLocaleDateString('it-IT', options) + " - " + maxDate.toLocaleDateString('it-IT', options);
         }
 
-        document.getElementById('eta-standard').innerText = getETA(4, 6);
-        document.getElementById('eta-priority').innerText = getETA(2, 3);
+        document.getElementById('eta-standard').innerText = getETA(4, 7);
+        document.getElementById('eta-priority').innerText = getETA(1, 2);
     </script>
 </body>
 </html>
