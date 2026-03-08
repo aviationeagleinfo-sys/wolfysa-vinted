@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WOLFYSA Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #2d5a27;
+            --accent-lime: #a2d149;
+            --text-dark: #1a1a1a;
+            --white-glass: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section immersiva */
+        .hero {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(45, 90, 39, 0.8));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            padding: 20px;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        /* Container Fluttuante */
+        .main-container {
+            max-width: 1100px;
+            margin: -80px auto 50px; /* Sovrapposizione alla Hero */
+            position: relative;
+            z-index: 3;
+            padding: 0 20px;
+        }
+
+        /* Cards del Processo */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--white-glass);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-bottom: 5px solid var(--primary-green);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(45, 90, 39, 0.2);
+        }
+
+        .icon-box {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-green);
+        }
+
+        .card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: var(--primary-green);
+        }
+
+        .card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        /* Sezione Garanzia */
+        .guarantee-section {
+            margin-top: 60px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .guarantee-img {
+            flex: 1;
+            background: url('https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
+            min-height: 300px;
+        }
+
+        .guarantee-text {
+            flex: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-green);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            align-self: flex-start;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #1e401b;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            .hero { height: 50vh; }
+            .main-container { margin-top: -40px; }
+            .guarantee-section { flex-direction: column; }
+            .guarantee-img { height: 250px; }
+            .guarantee-text { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Non è usato.<br>È Rinato.</h1>
+            <p class="hero-subtitle">Scopri come trasformiamo il second-hand in un'esperienza di lusso sostenibile.</p>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="process-grid">
+            <div class="card">
+                <div class="icon-box">💎</div>
+                <h3>1. Caccia alle Gemme</h3>
+                <p>Non accettiamo tutto. I nostri scout selezionano manualmente ogni capo. Cerchiamo rarità, tessuti eccellenti e design che sfidano il tempo. Se non ci emoziona, non entra nel catalogo.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon-box">🔬</div>
+                <h3>2. Controllo Aviation</h3>
+                <p>Applichiamo la stessa precisione dei controlli aeronautici. Verifica cuciture, autenticità dei brand e integrità strutturale. Grazie alla partnership con <strong>Aviation Eagle</strong>, nulla sfugge al radar.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon-box">🌿</div>
+                <h3>3. Fresh Start</h3>
+                <p>Dimentica l'odore di "chiuso". Ogni capo subisce un processo di igienizzazione professionale Eco-Friendly. Vapore, trattamenti naturali e cura maniacale. Arriva da te profumato di nuovo.</p>
+            </div>
+        </div>
+
+        <div class="guarantee-section">
+            <div class="guarantee-img"></div>
+            <div class="guarantee-text">
+                <h2 style="color: var(--primary-green); margin-top:0;">Pronto per l'Imbarco</h2>
+                <p>Quando apri un pacco WOLFYSA, non stai solo ricevendo un vestito. Stai ricevendo un capo rigenerato, pronto per essere indossato all'istante.</p>
+                <p><strong>Nessuna sorpresa, solo stile.</strong></p>
+                <a href="https://www.vinted.it/member/3133326563-wolfysa" class="cta-button">Vai allo Shop</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
