@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WOLFYSA - Accessori</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        :root {
+            --earth-brown: #5d4037;
+            --sand: #d7ccc8;
+            --text-dark: #3e2723;
+            --disabled-grey: #9e9e9e;
+        }
+        body { margin: 0; font-family: 'Open Sans', sans-serif; background: #efebe9; color: var(--text-dark); }
+        
+        .nav-bar { background: var(--earth-brown); padding: 15px; text-align: center; }
+        .nav-link { color: white; text-decoration: none; margin: 0 10px; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; }
+
+        /* Hero Detail */
+        .hero {
+            height: 40vh;
+            background: linear-gradient(rgba(93, 64, 55, 0.6), rgba(93, 64, 55, 0.8)), url('https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            display: flex; align-items: center; justify-content: center; text-align: center; color: white;
+        }
+        h1 { font-family: 'Montserrat', sans-serif; font-size: 3rem; margin: 0; text-transform: uppercase; border-bottom: 3px solid var(--sand); padding-bottom: 10px;}
+
+        .container { max-width: 1000px; margin: 40px auto; padding: 20px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        .detail-card {
+            background: white; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 15px 30px rgba(62, 39, 35, 0.15);
+            text-align: center; padding-bottom: 25px;
+            position: relative; /* Necessario per posizionare il logo in assoluto */
+            transition: transform 0.3s ease;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* LOGO INGRANDITO E VISIBILE */
+        .detail-img-circle {
+            width: 120px; /* Dimensione aumentata per massima visibilità */
+            height: 120px;
+            border-radius: 50%; 
+            object-fit: contain; 
+            padding: 8px; /* Spazio interno per proteggere il design del logo */
+            background: #ffffff; /* Sfondo bianco solido per stacco totale */
+            border: 4px solid var(--earth-brown); /* Bordo marcato */
+            position: absolute; 
+            top: 20px;
+            left: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            z-index: 10;
+        }
+
+        /* HEADER: Adattato per ospitare il logo più grande */
+        .card-header { 
+            height: 300px; /* Aumentato leggermente per bilanciare il logo */
+            background-color: var(--sand); 
+            margin-bottom: 20px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* TITOLO: Spaziato per non sovrapporsi visivamente al logo */
+        .detail-title { 
+            font-family: 'Montserrat', sans-serif; 
+            font-weight: 800; 
+            font-size: 1.4rem; 
+            color: var(--earth-brown); 
+            margin: 15px 0 10px; 
+            padding: 0 20px; 
+        }
+        .detail-txt { padding: 0 20px; font-size: 0.95rem; color: #666; margin-bottom: 25px; line-height: 1.5; }
+        
+        .btn-link { 
+            color: var(--earth-brown); 
+            font-weight: bold; 
+            text-decoration: none; 
+            border-bottom: 2px solid var(--earth-brown); 
+            transition: all 0.3s;
+            padding-bottom: 2px;
+        }
+
+        .btn-link:hover {
+            background-color: var(--earth-brown);
+            color: white;
+            padding: 5px 10px;
+            border-bottom: none;
+            border-radius: 5px;
+        }
+
+        .btn-link.disabled {
+            color: var(--disabled-grey);
+            border-bottom-color: var(--disabled-grey);
+            cursor: not-allowed;
+            pointer-events: none; 
+        }
+
+        @media (max-width: 768px) { h1 { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <div>
+            <h1>Dettagli & Accessori</h1>
+            <p style="font-size: 1.1rem; margin-top:15px;">La differenza è nelle piccole cose.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="grid">
+            
+            <div class="detail-card">
+                <div class="card-header" style="background-image: url('https://www.antikeo.com/uploads/images/img_x1920_133248_6936a84ba31294-75041991-90524463.jpg'); background-size: cover; background-position: center;"></div>
+                
+                <img src="https://static.soldoutservice.com/Hermes-Logo-2.jpg" class="detail-img-circle" alt="Logo Brand">
+                
+                <h3 class="detail-title">Braccialetto Hermés <i>Grado: <strong>B+</strong></i></h3>
+                <p class="detail-txt">Braccialetto Hermés Originale Anno 2014, Nero e Argento. Dimensione <i>21cm</i>.</p>
+                <a href="https://www.vinted.it/items/8086722355-bracciale-rigido-hermes-paris-b" class="btn-link">Disponibile da 139,00€ IVA escl.</a>
+            </div>
+
+            <div class="detail-card">
+                <div class="card-header" style="background-image: url('https://cdn.theluxurycloset.com/uploads/opt/products/750x750/luxury-women-louis-vuitton-used-accessories-p578668-003.jpg'); background-size: cover; background-position: center;"></div>
+                
+                <img src="https://www.salvatorepumo.it/wp-content/uploads/2022/02/marchio-louis-vuitton.png" class="detail-img-circle" alt="Logo Brand">
+                
+                <h3 class="detail-title">Braccialetto Louis Vuitton <i>Grado: <strong>B+</strong></i></h3>
+                <p class="detail-txt">Braccialetto Louis Vuitton Anno 2004, dettagli oro e tela monogram. Dimensione <i>18cm</i>.</p>
+                <a href="https://www.vinted.it/items/8091610590-bracciale-louis-vuitton-monogram" class="btn-link">Disponibile da 289,90€ IVA escl.</a>
+            </div>
+
+            <div class="detail-card">
+                <div class="card-header" style="background-image: url('https://assets.hermes.com/is/image/hermesproduct/bracciale-behapi-double-tour--064692CKAA-front-wm-4-0-0-800-800_g.jpg'); background-size: cover; background-position: center;"></div>
+                
+                <img src="https://static.soldoutservice.com/Hermes-Logo-2.jpg" class="detail-img-circle" alt="Logo Brand">
+                
+                <h3 class="detail-title">Braccialetto Hermés Double <i>Grado: <strong>B/A</strong></i></h3>
+                <p class="detail-txt">Braccialetto Hermés Double Tour, pelle marrone e chiusura palladio.</p>
+                <a href="https://www.vinted.it/items/8091720103-bracciale-behapi-double-tour-hermes-paris" class="btn-link disabled">Sold Out</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
