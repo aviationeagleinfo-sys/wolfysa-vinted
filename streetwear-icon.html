@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WOLFYSA - Streetwear</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        :root {
+            --urban-grey: #333;
+            --concrete: #e0e0e0;
+            --lime-pop: #8fcb55;
+            --disabled-grey: #ccc; /* Colore per disabilitato */
+        }
+        body { margin: 0; font-family: 'Open Sans', sans-serif; background: #fafafa; color: var(--urban-grey); }
+        
+        .nav-bar { background: var(--urban-grey); padding: 15px; text-align: center; }
+        .nav-link { color: white; text-decoration: none; margin: 0 10px; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; }
+        
+        /* Hero Urban */
+        .hero {
+            height: 40vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1512353087810-25dfcd100962?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            display: flex; align-items: center; justify-content: center; text-align: center; color: white;
+        }
+        h1 { font-family: 'Montserrat', sans-serif; font-size: 3rem; margin: 0; text-transform: uppercase; letter-spacing: -2px; }
+
+        .container { max-width: 1000px; margin: -50px auto 50px; padding: 20px; position: relative; z-index: 2; }
+        
+        .intro-card {
+            background: white; border-left: 10px solid var(--lime-pop);
+            padding: 40px; border-radius: 5px; text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 40px;
+        }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        
+        .item-card {
+            background: white; border: 1px solid #eee; transition: all 0.2s;
+        }
+        .item-card:hover { border-color: var(--lime-pop); }
+        
+        .item-img { height: 300px; background: #eee; object-fit: cover; width: 100%; filter: grayscale(20%); }
+        .item-card:hover .item-img { filter: grayscale(0%); }
+        
+        .item-info { padding: 20px; }
+        
+        .btn-buy {
+            display: inline-block; background: var(--urban-grey); color: white;
+            padding: 10px 20px; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.8rem;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        .btn-buy:hover { background: var(--lime-pop); color: var(--urban-grey); }
+
+        /* NUOVA CLASSE PER IL PULSANTE DISABILITATO */
+        .btn-buy.disabled {
+            background: var(--disabled-grey);
+            color: #777;
+            cursor: not-allowed;
+            pointer-events: none; /* Impedisce il click e l'hover */
+        }
+
+        @media (max-width: 768px) { h1 { font-size: 2.2rem; } }
+    </style>
+</head>
+<body>
+
+  
+
+    <div class="hero">
+        <div>
+            <h1>Streetwear Icons</h1>
+            <p style="font-size: 1.2rem; color: var(--lime-pop); font-weight:bold;">Urban / Sport / Hype</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="intro-card">
+            <h2 style="margin-top:0;">Dalla strada, per la strada.</h2>
+            <p>Il comfort incontra lo stile. Felpe oversize, t-shirt grafiche e pantaloni cargo. Capi selezionati per chi vive la città dinamicamente.</p>
+        </div>
+
+        <div class="grid">
+            <div class="item-card">
+                <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SRaUGgYE67tuw7PNuWEtAL0yGNwABAchoWf-_6g0HME2t0XchdVGKX9guCKqUqHjSwr1h_GyQwONDnEVG3ssCJywa4NzhzzZP1oRqtgeApF_j5v4OvMwdDseSOWbp_BFa1dzqwRN1FV_RSzSckrDf-Ywogv6DIJBqoBGgYghLrI_A3kMlZezpKHOtNGKMfOFkYp3CY3YkOKx78W_MZZf7ypcZWOheZOpGeo3-A=w1280" class="item-img" alt="Jersey Sfoderato">
+                <div class="item-info">
+                    <h3 class="item-title">Jersey Sfoderato</h3>
+                    <p class="item-desc">Jersey ottimo per aree urbane, caldo ed elegante. Taglia: <b>L</b>. | <b><i>Grado B/A</i></b></p>
+                    <a href="https://www.vinted.it/items/8105808563-jersey-sfoderato" class="btn-buy">Disponibile a €29,90</a>
+                </div>
+            </div>
+            <div class="item-card">
+                <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SRVzMqUZjTDHeb3UIRCXueYEL0XXgfx_H5eYJwwlfhGz3dljnW_81xjqA2mseCnnhK9-6VP-QmOr3nG2rzSXt6tWyQ4sw6QG0bX2Pj_7zq0vWx0CzTC8z2jqa5iaTy1-X_h6A8LmG_dtK_ZAlREkvEn40UOn5uuQJm2tp8mnZaIzVDGAQlC35CcKeyxBo_kQIL2V8qVNY7TSGoYtwXCiKsOsyShxvT2Db6F=w1280" class="item-img" alt="Jersey Sfoderato">
+                <div class="item-info">
+                    <h3 class="item-title">Jersey Sfoderato</h3>
+                    <p class="item-desc">Jersey ottimo per il lavoro, colore blu Navy, caldo ed elegante. Taglia: <b>L</b>. | <b><i>Grado B/A</i></b></p>
+                    <a href="https://www.vinted.it/items/8105775162-jersey-sfoderato" class="btn-buy">Disponibile a €29,90</a>
+                </div>
+            </div>
+            <div class="item-card">
+                <img src="https://photos6.spartoo.it/photos/283/28305856/28305856_1200_A.jpg" class="item-img" alt="Slam ATS">
+                <div class="item-info">
+                    <h3 class="item-title">Slam ATS Rosso</h3>
+                    <p class="item-desc">Giacca rossa della SLAM, ottima per le uscite eleganti , ma non troppo. Taglia: <b>L</b>. | <b><i>Grado A</i></b></p>
+                    <a href="https://www.vinted.it/items/8123323075-giacca-tecnica" class="btn-buy">Disponibile a €79,90</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
