@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WOLFYSA - Secure Tracking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+
+    <style>
+        /* --- CORE & NAV SETTINGS --- */
+        * { box-sizing: border-box; outline: none; }
+        :root {
+            --wolf-dark: #1e362d;
+            --wolf-green: #588157;
+            --accent-lime: #8fcb55;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --nav-glass: rgba(255, 255, 255, 0.9);
+            --glass-blur: blur(15px);
+        }
+
+        body {
+            margin: 0; font-family: 'Open Sans', sans-serif;
+            background: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            min-height: 100vh; padding-top: 70px;
+        }
+
+        /* --- NAV BAR MODULARE --- */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+            background: var(--nav-glass); backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 5%; z-index: 9999; border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .nav-logo {
+            font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.5rem;
+            color: var(--wolf-dark); text-transform: uppercase; text-decoration: none;
+        }
+        .nav-links { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
+        .nav-links a {
+            text-decoration: none; color: var(--wolf-dark); font-family: 'Montserrat', sans-serif;
+            font-weight: 600; font-size: 0.8rem; text-transform: uppercase; transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--wolf-green); }
+        .mobile-menu-btn { display: none; font-size: 1.5rem; color: var(--wolf-dark); cursor: pointer; }
+
+        @media (max-width: 1024px) {
+            .mobile-menu-btn { display: block; }
+            .nav-links {
+                display: none; flex-direction: column; position: absolute;
+                top: 70px; left: 0; width: 100%; background: white;
+                padding: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { display: flex; }
+        }
+
+        /* --- PARTNER BAR --- */
+        .partner-bar {
+            background: var(--wolf-dark); color: #fff; text-align: center;
+            padding: 10px; font-size: 0.8rem; font-weight: 600;
+            position: relative; z-index: 10;
+        }
+
+        /* --- MAIN CONTENT --- */
+        .content-wrapper {
+            display: flex; align-items: center; justify-content: center;
+            padding: 40px 20px; min-height: calc(100vh - 110px);
+        }
+
+        .main-card {
+            background: var(--glass-bg); backdrop-filter: blur(10px);
+            border-radius: 20px; width: 100%; max-width: 800px; padding: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3); text-align: center;
+            border-top: 5px solid var(--wolf-dark);
+        }
+
+        h1 { font-family: 'Montserrat', sans-serif; color: var(--wolf-dark); margin-bottom: 5px; text-transform: uppercase; }
+        .subtitle { color: #666; margin-bottom: 30px; font-size: 0.9rem; }
+
+        /* Input & Buttons */
+        .input-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; font-weight: bold; font-size: 0.8rem; color: var(--wolf-dark); margin-bottom: 5px; text-transform: uppercase; }
+        input { width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; }
+        
+        .btn-track {
+            background: var(--wolf-dark); color: white; padding: 15px 40px; border: none; border-radius: 50px;
+            font-size: 1rem; font-weight: bold; cursor: pointer; text-transform: uppercase; width: 100%;
+            transition: 0.3s;
+        }
+        .btn-track:disabled { background: #ccc; cursor: wait; }
+
+        /* Stepper & Data Box (Invariati) */
+        #result-section { display: none; margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; }
+        .stepper-wrapper { display: flex; justify-content: space-between; margin-bottom: 40px; position: relative; }
+        .stepper-wrapper::before { content: ''; position: absolute; top: 15px; left: 0; width: 100%; height: 3px; background: #ddd; z-index: 1; }
+        .progress-line-fill { position: absolute; top: 15px; left: 0; height: 3px; background: var(--wolf-green); z-index: 1; width: 0%; transition: width 1s ease; }
+        .stepper-item { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; flex: 1; }
+        .step-counter { width: 35px; height: 35px; border-radius: 50%; background: #ccc; color: white; display: flex; justify-content: center; align-items: center; font-weight: bold; margin-bottom: 10px; }
+        .step-name { font-size: 0.7rem; font-weight: bold; color: #999; text-transform: uppercase; }
+        .stepper-item.completed .step-counter { background: var(--wolf-green); }
+        .stepper-item.active .step-counter { background: var(--wolf-dark); transform: scale(1.2); }
+
+        .data-box { background: #f4f4f4; padding: 25px; border-radius: 15px; margin-top: 20px; text-align: left; }
+        .data-label { font-size: 0.75rem; text-transform: uppercase; color: #888; }
+        .data-value { font-family: 'Montserrat', sans-serif; font-weight: bold; font-size: 1.1rem; color: #333; }
+        .barcode-container { text-align: center; margin-top: 20px; padding-top: 15px; border-top: 1px dashed #ccc; }
+        .update-note { font-size: 0.8rem; color: #777; font-style: italic; margin-top: 20px; padding: 10px; border-left: 3px solid var(--wolf-green); background: rgba(0,0,0,0.03); }
+
+        @media (max-width: 600px) { .step-name { display: none; } }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="https://wolfysa.collaborazioni.aviationeagle.co.uk" class="nav-logo">Wolfysa</a>
+        <div class="mobile-menu-btn" id="mobile-toggle"><i class="fas fa-bars"></i></div>
+        <ul class="nav-links" id="nav-menu">
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/pagamenti.html">Pagamenti</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/contatti.html">Contatti</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/ordini.html">Ordini</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/il-fit-perfetto.html">Il fit perfetto</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/logistica.html">Logistica</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/eco-green.html">Eco Mission</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/esperienza.html">L'esperienza</a></li>
+        </ul>
+    </nav>
+
+    <div class="partner-bar">🤝 IN PARTNERSHIP STRATEGICA CON <strong>AVIATION EAGLE</strong></div>
+
+    <div class="content-wrapper">
+        <div class="main-card">
+            <h1>Wolfysa Logistics</h1>
+            <div class="subtitle">Accesso sicuro al registro spedizioni.</div>
+
+            <div id="login-section">
+                <div class="input-group">
+                    <label>Numero Ordine</label>
+                    <input type="text" id="orderId" placeholder="Es. 45178">
+                </div>
+                <div class="input-group">
+                    <label>Cognome Cliente</label>
+                    <input type="text" id="surname" placeholder="Es. Rossi">
+                </div>
+                <button class="btn-track" id="searchBtn" onclick="fetchOrder()">TRACCIA SPEDIZIONE</button>
+                <div id="error-msg" style="color:#d9534f; display:none; margin-top:15px; font-weight:bold;">⛔ Credenziali non trovate.</div>
+            </div>
+
+            <div id="result-section">
+                <div class="stepper-wrapper">
+                    <div class="progress-line-fill" id="progressLine"></div>
+                    <div class="stepper-item" id="step1"><div class="step-counter">1</div><div class="step-name">Ricevuto</div></div>
+                    <div class="stepper-item" id="step2"><div class="step-counter">2</div><div class="step-name">Prep.</div></div>
+                    <div class="stepper-item" id="step3"><div class="step-counter">3</div><div class="step-name">Spedito</div></div>
+                    <div class="stepper-item" id="step4"><div class="step-counter">4</div><div class="step-name">In Consegna</div></div>
+                    <div class="stepper-item" id="step5"><div class="step-counter">5</div><div class="step-name">Consegnato</div></div>
+                </div>
+
+                <div class="data-box">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                        <div><div class="data-label">Data</div><div class="data-value" id="resDate">--</div></div>
+                        <div style="text-align: right;"><div class="data-label">Totale</div><div class="data-value" id="resTotal">€ 0.00</div></div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <div class="data-label">Articolo</div>
+                        <div class="data-value" id="resItem">...</div>
+                    </div>
+                    <div>
+                        <div class="data-label">Tracking Number <span id="resCourier"></span></div>
+                        <div class="data-value" id="resTracking">...</div>
+                        <a href="#" id="resLink" target="_blank" style="color:var(--wolf-green); text-decoration:none; font-size:0.9rem; font-weight:bold;">Sito Corriere &rarr;</a>
+                    </div>
+                    <div class="barcode-container">
+                        <div class="data-label">Scan Order ID</div>
+                        <svg id="barcode"></svg>
+                    </div>
+                </div>
+
+                <div class="update-note">
+                    Nota: I dati satellitari potrebbero avere un leggero ritardo rispetto alla posizione reale.
+                </div>
+                <button onclick="location.reload()" style="margin-top:20px; background:transparent; border:1px solid #ccc; padding:10px 20px; border-radius:20px; cursor:pointer;">Nuova Ricerca</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gestione Menu Mobile
+        document.getElementById('mobile-toggle').addEventListener('click', () => {
+            document.getElementById('nav-menu').classList.toggle('active');
+            const icon = document.getElementById('mobile-toggle').querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Logica Fetch (Invariata)
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyImt6vqOd3k3gWcVuVf7Np2rrUmmGnFgRnJFOnaVs_ljdA0Li-a4fvH3f3BrQOqX9DtQ/exec"; 
+
+        function fetchOrder() {
+            const id = document.getElementById('orderId').value.trim();
+            const surname = document.getElementById('surname').value.trim();
+            const btn = document.getElementById('searchBtn');
+            if(!id || !surname) return alert("Dati mancanti");
+            btn.disabled = true; btn.innerText = "RICERCA IN CORSO...";
+
+            fetch(`${SCRIPT_URL}?id=${id}&surname=${surname}`)
+                .then(r => r.json())
+                .then(data => {
+                    if (data.result === "success") { showResult(data.data); } 
+                    else { 
+                        document.getElementById('error-msg').style.display = "block";
+                        btn.disabled = false; btn.innerText = "TRACCIA SPEDIZIONE";
+                    }
+                }).catch(() => alert("Errore Satellite."));
+        }
+
+        function showResult(data) {
+            document.getElementById('login-section').style.display = "none";
+            document.getElementById('result-section').style.display = "block";
+            document.getElementById('resDate').innerText = data.date;
+            document.getElementById('resTotal').innerText = "€ " + parseFloat(data.total).toFixed(2);
+            document.getElementById('resItem').innerText = data.item;
+            document.getElementById('resCourier').innerText = "(" + data.courier + ")";
+            document.getElementById('resTracking').innerText = data.tracking;
+            document.getElementById('resLink').href = data.link;
+
+            JsBarcode("#barcode", data.id, {
+                format: "CODE128", lineColor: "#1e362d", width: 2, height: 50, displayValue: true, fontSize: 14, font: "Montserrat"
+            });
+            updateStepper(data.status);
+        }
+
+        function updateStepper(status) {
+            for(let i=1; i<=5; i++) {
+                const s = document.getElementById('step'+i);
+                s.classList.remove('active', 'completed');
+                if(i < status) s.classList.add('completed');
+                if(i == status) s.classList.add('active');
+            }
+            document.getElementById('progressLine').style.width = ((status-1)*25) + "%";
+        }
+    </script>
+</body>
+</html>
