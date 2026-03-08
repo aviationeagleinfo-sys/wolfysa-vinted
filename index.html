@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WOLFYSA - Premium Reselling</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- RESET & CORE --- */
+        * {
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        :root {
+            --forest-deep: #1b3a1a;
+            --forest-light: #2e5c33;
+            --accent-lime: #8fcb55;
+            --text-dark: #222;
+            --white-glass: rgba(255, 255, 255, 0.9);
+            --nav-glass: rgba(255, 255, 255, 0.85);
+            --glass-blur: blur(15px);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+            padding-top: 70px; /* Spazio per la navbar fissa */
+        }
+
+        /* --- NAV BAR --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: var(--nav-glass);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--forest-deep);
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--forest-deep);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-lime);
+        }
+
+        /* Menu Mobile */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--forest-deep);
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            height: 85vh;
+            min-height: 500px;
+            background: url('https://images.unsplash.com/photo-1504198458649-3128b932f49e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(27, 58, 26, 0.8));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            max-width: 800px;
+            animation: slideUp 1s ease-out;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #fff;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        .hero-sub {
+            font-size: 1.4rem;
+            color: #eee;
+            margin: 20px 0 40px;
+            font-weight: 300;
+        }
+
+        .btn-hero {
+            display: inline-block;
+            background: #fff;
+            color: var(--forest-deep);
+            padding: 18px 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            animation: pulse-white 2s infinite;
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-5px);
+            background: var(--accent-lime);
+            color: #fff;
+        }
+
+        /* --- PARTNERSHIP BAR --- */
+        .partner-bar {
+            background: var(--forest-deep);
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            font-weight: 600;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- SEZIONE CATEGORIE (GRID) --- */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--forest-deep);
+            margin-bottom: 40px;
+            position: relative;
+            display: block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-lime);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .cat-card {
+            position: relative;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .cat-card:hover { transform: scale(1.03); }
+
+        .cat-img { width: 100%; height: 100%; object-fit: cover; }
+
+        .cat-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 30px 20px;
+            color: white;
+        }
+
+        .cat-title { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 700; margin: 0; }
+
+        .cat-link { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; display: inline-block; color: var(--accent-lime); }
+
+        /* --- TRUST SECTION --- */
+        .trust-section {
+            margin-top: 80px;
+            background: url('https://images.unsplash.com/photo-1501854140884-074bf6b24363?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') fixed center/cover;
+            padding: 80px 20px;
+        }
+
+        .glass-panel {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white-glass);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .value-grid { display: flex; flex-wrap: wrap; justify-content: space-around; gap: 30px; margin-top: 40px; }
+        .value-item { flex: 1; min-width: 200px; }
+        .value-icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+        .value-text h3 { margin: 0; color: var(--forest-deep); font-family: 'Montserrat', sans-serif; }
+        .value-text p { font-size: 0.9rem; color: #555; }
+
+        /* --- FOOTER / FINAL CTA --- */
+        .final-cta { background: #fff; padding: 60px 20px; text-align: center; }
+        .aviation-badge { display: inline-flex; align-items: center; background: #f0f0f0; padding: 10px 20px; border-radius: 30px; margin-bottom: 20px; color: #666; font-size: 0.9rem; }
+
+        /* --- ANIMAZIONI --- */
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse-white { 0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); } }
+
+        /* --- MOBILE TWEAKS --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Nascondi per ora, implementabile con JS */
+            .mobile-menu-btn { display: block; }
+            h1 { font-size: 2.5rem; }
+            .hero { height: 80vh; }
+            .glass-panel { padding: 30px 20px; }
+            .value-grid { flex-direction: column; }
+            .btn-hero { width: 100%; padding: 15px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="https://wolfysa.collaborazioni.aviationeagle.co.uk" class="nav-logo">Wolfysa</a>
+        <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
+        <ul class="nav-links">
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/pagamenti.html">Pagamenti</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/contatti.html">Contatti</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/ordini.html">Ordini</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/il-fit-perfetto.html">Il fit perfetto</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/logistica.htl">Logistica</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/eco-green.html">Eco Mission</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/esperienza.html">l'esperienza</a></li>
+        </ul>
+    </nav>
+
+    <div class="partner-bar">
+        🤝 IN PARTNERSHIP STRATEGICA CON <strong>AVIATION EAGLE</strong>
+    </div>
+
+    <div class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Wolfysa</h1>
+            <div class="hero-sub">Selezione Premium. Logistica di Precisione. Stile Sostenibile.</div>
+            <a href="https://www.vinted.it/member/3133326563-wolfysa" target="_blank" class="btn-hero">Vai allo Store</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">Esplora la Stiva</h2>
+        <div class="category-grid">
+            <a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/outerwear.html" class="cat-card">
+                <img src="https://images.unsplash.com/photo-1664207251296-569bacae6f04?q=80&w=987&auto=format&fit=crop" alt="Outerwear" class="cat-img">
+                <div class="cat-overlay">
+                    <h3 class="cat-title">Outerwear & Tech</h3>
+                    <span class="cat-link">Giacche e Cappotti &rarr;</span>
+                </div>
+            </a>
+            <a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/streewear-icon.html" class="cat-card">
+                <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Streetwear" class="cat-img">
+                <div class="cat-overlay">
+                    <h3 class="cat-title">Streetwear Icons</h3>
+                    <span class="cat-link">Urban Style &rarr;</span>
+                </div>
+            </a>
+            <a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/accessori.html" class="cat-card">
+                <img src="https://images.unsplash.com/photo-1559563458-527698bf5295?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Accessories" class="cat-img">
+                <div class="cat-overlay">
+                    <h3 class="cat-title">Accessori & Bags</h3>
+                    <span class="cat-link">Dettagli Tattici &rarr;</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="trust-section">
+        <div class="glass-panel">
+            <h2 style="font-family: 'Montserrat', sans-serif; color: var(--forest-deep); margin-top:0;">Standard Operativi</h2>
+            <p style="margin-bottom: 40px;">Ogni capo segue un protocollo rigoroso prima di raggiungere il tuo armadio.</p>
+            <div class="value-grid">
+                <div class="value-item">
+                    <span class="value-icon">✈️</span>
+                    <div class="value-text">
+                        <h3>Aviation Quality</h3>
+                        <p>Supervisione professionale garantita da Aviation Eagle.</p>
+                    </div>
+                </div>
+                <div class="value-item">
+                    <span class="value-icon">🧼</span>
+                    <div class="value-text">
+                        <h3>Igienizzato</h3>
+                        <p>Lavaggio e sanificazione professionale su ogni capo.</p>
+                    </div>
+                </div>
+                <div class="value-item">
+                    <span class="value-icon">🚀</span>
+                    <div class="value-text">
+                        <h3>Spedizione 24h*</h3>
+                        <p>Il tuo ordine parte entro 24 ore lavorative.*</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="final-cta">
+        <div class="aviation-badge">Powered by Aviation Eagle System</div>
+        <h2 style="font-family: 'Montserrat', sans-serif; font-size: 2rem; color: var(--forest-deep);">Pronto al Decollo?</h2>
+        <a href="https://www.vinted.it/member/3133326563-wolfysa" target="_blank" class="btn-hero" style="background: var(--forest-deep); color: white; animation: none;">Acquista su Vinted</a>
+        <div style="margin-top: 50px; font-size: 0.8rem; color: #999;">
+            &copy; 2026 WOLFYSA. All rights reserved.<br>
+            <a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/il-fit-perfetto.html" style="color:#999; text-decoration:none;">Guida Taglie</a> | 
+            <a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/eco-green.html" style="color:#999; text-decoration:none;">Eco Mission</a> |
+            <a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/logistica.html" style="color:#999; text-decoration:none;">Logistica</a>
+        </div>
+    </div>
+
+</body>
+</html>
