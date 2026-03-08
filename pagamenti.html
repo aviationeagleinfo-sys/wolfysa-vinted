@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WOLFYSA - Logistica & Pagamenti</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --wolf-dark: #1e362d;
+            --wolf-green: #588157;
+            --wolf-light: #a3b18a;
+            --glass-bg: rgba(255, 255, 255, 0.90);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --blur: blur(20px);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+            --ios-radius: 24px;
+            --nav-glass: rgba(255, 255, 255, 0.98);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #f4f7f4;
+            min-height: 100vh;
+            color: #333;
+            padding-top: 80px; /* Offset per Navbar */
+        }
+
+        /* --- NAV BAR MODULARE --- */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+            background: var(--nav-glass); backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 5%; z-index: 9999; border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .nav-logo {
+            font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.5rem;
+            color: var(--wolf-dark); text-transform: uppercase; text-decoration: none;
+            letter-spacing: 1px;
+        }
+        .nav-links { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
+        .nav-links a {
+            text-decoration: none; color: var(--wolf-dark); font-family: 'Montserrat', sans-serif;
+            font-weight: 600; font-size: 0.8rem; text-transform: uppercase; transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--wolf-green); }
+        .mobile-menu-btn { display: none; font-size: 1.5rem; color: var(--wolf-dark); cursor: pointer; }
+
+        @media (max-width: 1024px) {
+            .mobile-menu-btn { display: block; }
+            .nav-links {
+                display: none; flex-direction: column; position: absolute;
+                top: 70px; left: 0; width: 100%; background: white;
+                padding: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { display: flex; }
+        }
+
+        /* --- PARTNER BAR --- */
+        .partner-bar {
+            background: var(--wolf-dark); color: #fff; text-align: center;
+            padding: 10px; font-size: 0.8rem; font-weight: 600; margin-bottom: 20px;
+        }
+
+        .main-container { width: 100%; max-width: 900px; margin: 0 auto; padding: 0 20px 40px; display: flex; flex-direction: column; gap: 25px; }
+
+        .glass-header {
+            background: var(--glass-bg); backdrop-filter: var(--blur);
+            border-radius: var(--ios-radius); padding: 30px; text-align: center; box-shadow: var(--shadow);
+        }
+
+        h1 { font-family: 'Montserrat', sans-serif; font-weight: 800; color: var(--wolf-dark); font-size: 1.8rem; margin-bottom: 5px; }
+
+        /* LOGISTICA SEMPLIFICATA */
+        .services-flex { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+
+        .service-card {
+            background: white; border-radius: var(--ios-radius); padding: 25px; 
+            border: 1px solid rgba(0,0,0,0.05); box-shadow: var(--shadow);
+            flex: 1 1 300px; max-width: 420px; display: flex; flex-direction: column; justify-content: space-between;
+        }
+
+        .service-icon { font-size: 1.8rem; color: var(--wolf-green); margin-bottom: 15px; }
+        .service-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--wolf-dark); }
+        .service-price { font-size: 1.4rem; font-weight: 800; color: var(--wolf-green); margin: 15px 0; }
+        
+        .eta-badge {
+            background: #f1f8e9; color: #2e7d32; padding: 8px 12px; border-radius: 12px;
+            font-size: 0.8rem; font-weight: 600; margin-top: 10px; display: inline-block;
+        }
+
+        /* PAGAMENTI */
+        .payment-section { background: white; border-radius: var(--ios-radius); padding: 30px; box-shadow: var(--shadow); }
+        .vinted-balance-wrapper { 
+            display: flex; align-items: center; background: #fafafa; padding: 15px; 
+            border-radius: 15px; margin-bottom: 15px; border-left: 5px solid #007782; 
+        }
+        .v-icon { width: 45px; height: 45px; margin-right: 15px; }
+        
+        .info-box { background: #fdfdfd; border-radius: 15px; padding: 20px; border: 1px dashed #ddd; margin-top: 20px; }
+
+        .btn-action { 
+            display: block; text-align: center; background: var(--wolf-green); color: white; 
+            padding: 18px; border-radius: 50px; text-decoration: none; font-weight: 800; 
+            font-family: 'Montserrat', sans-serif; margin-top: 10px; transition: 0.3s;
+        }
+        .btn-action:hover { transform: scale(1.02); background: var(--wolf-dark); }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.5rem; }
+            .service-card { flex: 1 1 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="https://wolfysa.collaborazioni.aviationeagle.co.uk" class="nav-logo">Wolfysa</a>
+        <div class="mobile-menu-btn" id="mobile-toggle"><i class="fas fa-bars"></i></div>
+        <ul class="nav-links" id="nav-menu">
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/pagamenti.html">Pagamenti</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/contatti.html">Contatti</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/ordini.html">Ordini</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/il-fit-perfetto.html">Il fit perfetto</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/logistica.html">Logistica</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/eco-green.html">Eco Mission</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/esperienza.html">L'esperienza</a></li>
+        </ul>
+    </nav>
+
+    <div class="partner-bar">🤝 POWERED BY <strong>AVIATION EAGLE</strong></div>
+
+    <div class="main-container">
+        <header class="glass-header">
+            <h1>Logistica & Pagamenti</h1>
+            <p>Evasione rapida e transazioni sicure 100%.</p>
+        </header>
+
+        <div class="services-flex">
+            <div class="service-card">
+                <div>
+                    <div class="service-icon"><i class="fas fa-box"></i></div>
+                    <div class="service-title">Poste Delivery Standard</div>
+                    <p style="font-size: 0.85rem; color: #666; margin-top: 5px;">Consegna affidabile presso Punto Poste o domicilio.</p>
+                    <div id="eta-standard" class="eta-badge">Calcolo rotta...</div>
+                </div>
+                <div class="service-price">INCLUSA</div>
+            </div>
+
+            <div class="service-card">
+                <div>
+                    <div class="service-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="service-title">Poste Delivery Business</div>
+                    <p style="font-size: 0.85rem; color: #666; margin-top: 5px;">Evasione prioritaria e tempi di transito ridotti.</p>
+                    <div id="eta-priority" class="eta-badge">Calcolo rotta...</div>
+                </div>
+                <div class="service-price">€ 6,90</div>
+            </div>
+        </div>
+
+        <div class="payment-section">
+            <h2 style="font-family:'Montserrat'; margin-bottom:20px; font-size: 1.2rem;">Sistemi di Pagamento</h2>
+            
+            <div class="vinted-balance-wrapper">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Vinted_logo.png" class="v-icon" style="object-fit: contain;" alt="Vinted">
+                <div><strong>Saldo Vinted / Carta</strong><br><small>Metodo predefinito in-app</small></div>
+            </div>
+
+            <div class="vinted-balance-wrapper" style="border-left-color: #ff424e;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS27a1MyUOEWgE9YCmcLWHWwu0OXOmrbEh2Kw&s" class="v-icon" style="border-radius: 50%;" alt="Satispay">
+                <div><strong>Satispay (Extra-App)</strong><br><small style="color:#d32f2f;">Per transazioni dirette e veloci</small></div>
+            </div>
+
+            <div class="info-box">
+                <p style="font-size: 0.85rem; line-height: 1.5;">
+                    <i class="fas fa-shield-alt"></i> <strong>Sicurezza:</strong> I pagamenti in-app sono protetti dal sistema Vinted. Satispay offre transazioni tracciate e ricevuta elettronica istantanea.
+                </p>
+            </div>
+        </div>
+
+        <a href="https://www.vinted.it/member/3133326563-wolfysa" target="_blank" class="btn-action">SCOPRI LE OFFERTE <i class="fas fa-shopping-bag"></i></a>
+    </div>
+
+    <script>
+        document.getElementById('mobile-toggle').addEventListener('click', () => {
+            document.getElementById('nav-menu').classList.toggle('active');
+        });
+
+        function getETA(minDays, maxDays) {
+            const now = new Date();
+            const minDate = new Date();
+            const maxDate = new Date();
+            minDate.setDate(now.getDate() + minDays);
+            maxDate.setDate(now.getDate() + maxDays);
+            const options = { day: 'numeric', month: 'short' };
+            return "Consegna: " + minDate.toLocaleDateString('it-IT', options) + " - " + maxDate.toLocaleDateString('it-IT', options);
+        }
+
+        document.getElementById('eta-standard').innerText = getETA(4, 6);
+        document.getElementById('eta-priority').innerText = getETA(2, 3);
+    </script>
+</body>
+</html>
