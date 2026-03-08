@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WOLFYSA - Guida Taglie & Status</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* RESET E VARIABILI */
+        * { box-sizing: border-box; }
+
+        :root {
+            --forest-dark: #1e362d;
+            --leaf-green: #588157;
+            --sage-light: #a3b18a;
+            --bg-grey: #f5f7f5;
+            --white: #ffffff;
+            --nav-glass: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg-grey);
+            color: #333; margin: 0; padding: 0;
+            overflow-x: hidden;
+            padding-top: 70px; /* Offset per Navbar */
+        }
+
+        /* --- NAV BAR MODULARE --- */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+            background: var(--nav-glass); backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 5%; z-index: 9999; border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .nav-logo {
+            font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.5rem;
+            color: var(--forest-dark); text-transform: uppercase; text-decoration: none;
+            letter-spacing: 1px;
+        }
+        .nav-links { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
+        .nav-links a {
+            text-decoration: none; color: var(--forest-dark); font-family: 'Montserrat', sans-serif;
+            font-weight: 600; font-size: 0.8rem; text-transform: uppercase; transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--leaf-green); }
+        .mobile-menu-btn { display: none; font-size: 1.5rem; color: var(--forest-dark); cursor: pointer; }
+
+        @media (max-width: 1024px) {
+            .mobile-menu-btn { display: block; }
+            .nav-links {
+                display: none; flex-direction: column; position: absolute;
+                top: 70px; left: 0; width: 100%; background: white;
+                padding: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { display: flex; }
+        }
+
+        /* --- PARTNER BAR --- */
+        .partner-bar {
+            background: var(--forest-dark); color: #fff; text-align: center;
+            padding: 10px; font-size: 0.8rem; font-weight: 600;
+        }
+
+        /* HEADER IMMERSIVO */
+        .header-nature {
+            position: relative; height: 250px;
+            background: url('https://images.unsplash.com/photo-1511497584788-876760111969?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            display: flex; align-items: center; justify-content: center; text-align: center; color: var(--white);
+        }
+        .header-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(30, 54, 45, 0.8), rgba(88, 129, 87, 0.6));
+        }
+        .header-content { position: relative; z-index: 2; padding: 20px; }
+        h1 { font-family: 'Montserrat', sans-serif; font-size: 2.2rem; font-weight: 800; margin: 0; text-transform: uppercase; }
+
+        /* LAYOUT PRINCIPALE */
+        .container {
+            max-width: 1000px; margin: -40px auto 40px; padding: 0 15px;
+            position: relative; z-index: 10; display: flex; flex-wrap: wrap; gap: 30px;
+        }
+
+        .measure-section {
+            flex: 1; min-width: 300px; background: var(--white); padding: 30px;
+            border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-top: 5px solid var(--forest-dark);
+        }
+        h2 { font-family: 'Montserrat', sans-serif; color: var(--forest-dark); font-size: 1.5rem; margin-top: 0; border-bottom: 2px solid var(--sage-light); padding-bottom: 15px; margin-bottom: 25px; }
+        
+        .measure-item { margin-bottom: 20px; }
+        .measure-title { display: flex; align-items: center; font-weight: 800; color: var(--leaf-green); margin-bottom: 5px; }
+        .measure-desc { font-size: 0.95rem; color: #555; line-height: 1.5; }
+
+        .condition-section { flex: 1; min-width: 300px; }
+        .condition-card {
+            background: var(--white); padding: 20px; border-radius: 12px; margin-bottom: 15px;
+            display: flex; align-items: flex-start; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease; border-left: 4px solid transparent;
+        }
+        .condition-card:hover { transform: translateX(5px); }
+
+        /* Status Colors */
+        .status-new { border-left-color: #2ecc71; }
+        .status-top { border-left-color: #3498db; }
+        .status-good { border-left-color: #f1c40f; }
+        .status-ni { border-left-color: #ff7514; }
+        .status-bad { border-left-color: #b30000; }
+
+        .badge {
+            background: var(--forest-dark); color: white; padding: 5px 10px; border-radius: 6px;
+            font-size: 0.8rem; font-weight: bold; margin-right: 15px; min-width: 60px; text-align: center;
+        }
+
+        .cta-box {
+            width: 100%; background: linear-gradient(135deg, var(--forest-dark), #2a5041);
+            color: white; text-align: center; padding: 40px 20px; border-radius: 20px;
+            margin-top: 10px; box-shadow: 0 15px 40px rgba(30, 54, 45, 0.3); position: relative; overflow: hidden;
+        }
+        .btn-buy {
+            display: inline-block; background: var(--white); color: var(--forest-dark);
+            padding: 18px 45px; border-radius: 50px; font-weight: 800; text-transform: uppercase;
+            text-decoration: none; margin-top: 25px; animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+
+        @media (max-width: 700px) {
+            .container { margin-top: -30px; }
+            .measure-section, .condition-section { min-width: 100%; }
+            .btn-buy { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="https://wolfysa.collaborazioni.aviationeagle.co.uk" class="nav-logo">Wolfysa</a>
+        <div class="mobile-menu-btn" id="mobile-toggle"><i class="fas fa-bars"></i></div>
+        <ul class="nav-links" id="nav-menu">
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/pagamenti.html">Pagamenti</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/contatti.html">Contatti</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/ordini.html">Ordini</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/il-fit-perfetto.html">Il fit perfetto</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/logistica.html">Logistica</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/eco-green.html">Eco Mission</a></li>
+            <li><a href="https://wolfysa.collaborazioni.aviationeagle.co.uk/esperienza.html">L'esperienza</a></li>
+        </ul>
+    </nav>
+
+    <div class="partner-bar">🤝 IN PARTNERSHIP STRATEGICA CON <strong>AVIATION EAGLE</strong></div>
+
+    <div class="header-nature">
+        <div class="header-overlay"></div>
+        <div class="header-content">
+            <h1>Taglie & Condizioni</h1>
+            <div class="subtitle">Precisione tecnica, zero sorprese.</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="measure-section">
+            <h2>📏 Precisione Millimetrica</h2>
+            <p style="margin-bottom: 25px; font-style: italic; color: #666;">
+                Misuriamo ogni capo steso su piano (Flat Lay) per garantirti il fit perfetto.
+            </p>
+            <div class="measure-item">
+                <div class="measure-title">↔️ Larghezza Torace</div>
+                <div class="measure-desc">Da ascella ad ascella, punto più stretto sotto le braccia.</div>
+            </div>
+            <div class="measure-item">
+                <div class="measure-title">↕️ Lunghezza Schiena</div>
+                <div class="measure-desc">Dal colletto fino al bordo inferiore.</div>
+            </div>
+            <div class="measure-item">
+                <div class="measure-title">💪 Manica</div>
+                <div class="measure-desc">Dalla cucitura della spalla al polsino.</div>
+            </div>
+        </div>
+
+        <div class="condition-section">
+            <div class="condition-card status-new">
+                <div class="badge">A+</div>
+                <div class="card-text">
+                    <h4>Nuovo con Cartellino (BNWT)</h4>
+                    <p>Intatto. Mai indossato. Come appena uscito dalla boutique.</p>
+                </div>
+            </div>
+            <div class="condition-card status-top">
+                <div class="badge">B/A</div>
+                <div class="card-text">
+                    <h4>Condizioni Eccellenti</h4>
+                    <p>Usato con cura maniacale. Colori vivi, tessuti integri.</p>
+                </div>
+            </div>
+            <div class="condition-card status-good">
+                <div class="badge">B+</div>
+                <div class="card-text">
+                    <h4>Condizioni Molto Buone</h4>
+                    <p>Piccoli segni del tempo segnalati in foto.</p>
+                </div>
+            </div>
+            <div class="condition-card status-bad">
+                <div class="badge">C</div>
+                <div class="card-text">
+                    <h4>Mediocre</h4>
+                    <p>Danni o parti mancanti (se accessori) segnalati in foto.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-box">
+            <h2 style="color:white; border:none; margin-bottom:10px;">Il tuo prossimo capo ti aspetta.</h2>
+            <p style="font-size: 1.1rem; opacity: 0.9;">Ogni pezzo è unico. Non lasciartelo scappare.</p>
+            <a href="https://www.vinted.it/member/3133326563-wolfysa" target="_blank" class="btn-buy">Vai allo Shop WOLFYSA</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('mobile-toggle').addEventListener('click', () => {
+            document.getElementById('nav-menu').classList.toggle('active');
+            const icon = document.getElementById('mobile-toggle').querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+    </script>
+</body>
+</html>
