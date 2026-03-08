@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WOLFYSA - Outerwear</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        :root {
+            --cold-green: #2d4f40;
+            --ice-white: #f0f7f4;
+            --text-dark: #222;
+            --disabled-grey: #ccc; /* Nuovo colore per disabilitato */
+        }
+        body { margin: 0; font-family: 'Open Sans', sans-serif; background: #f4f4f4; color: var(--text-dark); }
+        
+        /* Navigazione Semplice */
+        .nav-bar {
+            background: var(--cold-green);
+            padding: 15px;
+            text-align: center;
+        }
+        .nav-link { color: white; text-decoration: none; margin: 0 10px; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; }
+        .nav-link:hover { text-decoration: underline; }
+
+        /* Hero */
+        .hero {
+            height: 40vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(45, 79, 64, 0.8)), url('https://images.unsplash.com/photo-1516762689617-e1cffcef479d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            display: flex; align-items: center; justify-content: center; text-align: center; color: white;
+        }
+        h1 { font-family: 'Montserrat', sans-serif; font-size: 3rem; margin: 0; text-transform: uppercase; }
+
+        /* Content */
+        .container { max-width: 1000px; margin: -50px auto 50px; padding: 20px; position: relative; z-index: 2; }
+        
+        .intro-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px; border-radius: 15px; text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 40px;
+        }
+
+        /* Product Grid Simulation */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        
+        .item-card {
+            background: white; border-radius: 10px; overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s;
+        }
+        .item-card:hover { transform: translateY(-5px); }
+        .item-img { height: 250px; background: #ddd; object-fit: cover; width: 100%; }
+        .item-info { padding: 20px; }
+        .item-title { font-weight: bold; margin: 0 0 5px 0; font-family: 'Montserrat', sans-serif; }
+        .item-desc { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
+        
+        .btn-buy {
+            display: block; width: 100%; background: var(--cold-green); color: white; text-align: center;
+            padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        /* NUOVA CLASSE PER IL PULSANTE DISABILITATO */
+        .btn-buy.disabled {
+            background: var(--disabled-grey);
+            color: #777;
+            cursor: not-allowed;
+            pointer-events: none; /* Impedisce il click */
+            box-shadow: none;
+        }
+
+        @media (max-width: 768px) { h1 { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+
+   
+
+    <div class="hero">
+        <div>
+            <h1>Outerwear & Tech</h1>
+            <p style="font-size: 1.2rem; opacity: 0.9;">Giacche. Parka. Technical Shells.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="intro-card">
+            <h2 style="margin-top:0; color:var(--cold-green);">Scudo contro gli Elementi</h2>
+            <p>Selezioniamo capispalla progettati per durare. Dal vintage militare ai tessuti tecnici moderni. Ogni zip controllata, ogni imbottitura verificata.</p>
+        </div>
+<hide>
+        <div class="grid">
+            <div class="item-card">
+                <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQbDxoFk6I5xI7ggAMow3r4Q-jybE50s8_dJBo2dGPlJdTUAlY7hN3Itke_dPcFfGpOmVu9cG9ZkOYIrW4kANwbGqzsXR_aK0Wz0VX_V-pjCLTyANNMgvWj60pTpiPvbpBNE3lKLZp7X14q26YzJo6VwBgh8BjOaX69x4tUu8SdFCOVhJHUyRTr6-COUOr6ZjAW5vHazbcFuRfgz6BaATTbOhNm7uWIdwd_H7Q=w1280" class="item-img" alt="Giacca Tecnica">
+                <div class="item-info">
+                    <h3 class="item-title">Jersey Sfoderato</h3>
+                    <p class="item-desc">Jersey ottimo per aree urbane, caldo ed elegante. Taglia: <b>L</b>. | <b><i>Grado B/A</i></b></p>
+                    <a href="https://www.vinted.it/items/8105808563-jersey-sfoderato" class="btn-buy">Disponibile a €29,90</a>
+                </div>
+            </div>
+            <div class="item-card">
+                <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQ6iA8Bee9p2U3Z_5MGvm8LXIc6mlZy5HzK4-uXG_bERY0WY_9D1OtLh9Yq0i882eHgMHws4hQeH9kg6lPzZruZjpeHiyZi24s5apmEsk6DnaHQva2qdTihx4kUZDnACqCEoub-c3sXfqypzbXsR-DVNb2l0U1k4pG4ZJN20T8VoE0jBUS9tAy19UOOjrwUGuUH6ox2eERBchpYBTrdIdCirPPs3gERkip6=w1280" class="item-img" alt="Giacca Tecnica">
+                <div class="item-info">
+                    <h3 class="item-title">Jersey Sfoderato</h3>
+                    <p class="item-desc">Jersey ottimo per il lavoro, colore blu Navy, caldo ed elegante. Taglia: <b>L</b>. | <b><i>Grado B/A</i></b></p>
+                    <a href="https://www.vinted.it/items/8105775162-jersey-sfoderato" class="btn-buy">Disponibile a €29,90</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</hide>
+</body>
+</html>
